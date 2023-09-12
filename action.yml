@@ -12,7 +12,7 @@ runs:
         #However, the $HOME folder is changed to /github/home
         #TODO: elixir dependencies migration
         yum update -y
-        yum install sudo -y
+        yum install sudo git jq -y
         sudo rm -f $HOME/.ssh/config
         sudo cp -a /root/. $HOME/
       shell: bash
