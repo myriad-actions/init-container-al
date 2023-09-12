@@ -1,0 +1,18 @@
+name: 'initialize docker container environment for Amazon Linux'
+
+description: 'prepare the container to run the target script(s)'
+
+runs:
+  using: "composite"
+  steps:
+    - name: github issue workaround
+      run: |
+        #BUG: https://github.com/actions/runner/issues/863
+        #On Github Actions, container default user is root
+        #However, the $HOME folder is changed to /github/home
+        #TODO: elixir dependencies migration
+        yum update -y
+        yum install sudo -y
+        sudo rm -f $HOME/.ssh/config
+        sudo cp -a /root/. $HOME/
+      shell: bash
